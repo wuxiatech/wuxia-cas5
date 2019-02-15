@@ -1,0 +1,12 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^http://127\\.0\\.0\\.1.*",
+  "name" : "Localhost",
+  "theme" : "apereo",
+  "id" : 10000003,
+  "description" : "Apereo foundation sample service",
+  "evaluationOrder" : 1,
+  "attributeReleasePolicy" : {
+    "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
+  }
+}
