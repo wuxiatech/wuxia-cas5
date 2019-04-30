@@ -8,6 +8,7 @@
     <packaging>war</packaging>
     <version>2.0</version>
     <name>WUXIA CAS Server 5.3</name>
+    <url>https://github.com/wuxiatech/wuxia-cas5</url>
     <build>
         <plugins>
             <plugin>
@@ -103,8 +104,8 @@
         </dependency>
         <dependency>
             <groupId>cn.wuxia.common</groupId>
-            <artifactId>wuxia-common</artifactId>
-            <version>2.3.1</version>
+            <artifactId>wuxia.common</artifactId>
+            <version>2.3.3</version>
             <exclusions>
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
@@ -122,8 +123,8 @@
         </dependency>
         <dependency>
             <groupId>cn.wuxia.common</groupId>
-            <artifactId>wuxia-weixin-api</artifactId>
-            <version>2.3.1</version>
+            <artifactId>wuxia.weixin-api</artifactId>
+            <version>2.3.3.1</version>
         </dependency>
         <dependency>
             <groupId>org.apereo.cas</groupId>
