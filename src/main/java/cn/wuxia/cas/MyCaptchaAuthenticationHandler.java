@@ -3,6 +3,7 @@ package cn.wuxia.cas;
 import cn.wuxia.cas.user.bean.MyUsernamePasswordCredential;
 import cn.wuxia.common.util.MapUtil;
 import cn.wuxia.common.util.StringUtil;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.hash.ConfigurableHashService;
@@ -155,7 +156,8 @@ public class MyCaptchaAuthenticationHandler extends AbstractUsernamePasswordAuth
                 throw new FailedLoginException("Multiple records found for " + username);
             }
         }
-        return createHandlerResult(transformedCredential, new DefaultPrincipalFactory().createPrincipal(username, returnMap));
+//        return createHandlerResult(transformedCredential, new DefaultPrincipalFactory().createPrincipal(username));
+        return createHandlerResult(transformedCredential, new DefaultPrincipalFactory().createPrincipal(MapUtils.getString(returnMap, "casAccountId"), returnMap));
     }
 
 

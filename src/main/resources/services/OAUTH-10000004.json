@@ -1,6 +1,6 @@
 {
   "@class": "org.apereo.cas.support.oauth.services.OAuthRegisteredService",
-  "serviceId": "^(http|https|imaps)://.*",
+  "serviceId": "^(https|imaps)://.*",
   "clientId":"20190214",
   "clientSecret":"123456",
   "name": "OAuth",

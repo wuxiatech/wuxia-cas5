@@ -1,10 +1,10 @@
 {
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^http://127\\.0\\.0\\.1.*",
-  "name" : "Localhost",
+  "serviceId" : "^(http|https|imaps)://(.*)\\.doctorm\\.cn.*",
+  "name" : "daoming",
   "theme" : "daoming",
   "id" : 10000003,
-  "description" : "Apereo foundation sample service",
+  "description" : "daoming passport service",
   "evaluationOrder" : 1,
   "attributeReleasePolicy" : {
     "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
