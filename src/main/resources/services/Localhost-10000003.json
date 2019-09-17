@@ -1,6 +1,6 @@
 {
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^http://127\\.0\\.0\\.1.*",
+  "serviceId" : "^(https|http)://.*",
   "name" : "Localhost",
   "theme" : "daoming",
   "id" : 10000003,

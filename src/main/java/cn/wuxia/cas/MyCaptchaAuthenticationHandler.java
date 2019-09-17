@@ -20,16 +20,15 @@ import org.apereo.cas.authentication.principal.DefaultPrincipalFactory;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.services.ServicesManager;
 import org.nutz.dao.Sqls;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.security.auth.login.AccountNotFoundException;
 import javax.security.auth.login.FailedLoginException;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import java.security.GeneralSecurityException;
 import java.util.HashMap;
@@ -107,12 +106,9 @@ public class MyCaptchaAuthenticationHandler extends AbstractUsernamePasswordAuth
         final String requestCaptcha = myCredential.getCaptcha();
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        Object attribute = attributes.getRequest().getSession().getAttribute("captcha");
 
-        String realCaptcha = attribute == null ? null : attribute.toString();
-
-        if (StringUtils.isBlank(requestCaptcha) || !requestCaptcha.toUpperCase().equals(realCaptcha)) {
-//            throw new FailedLoginException("验证码错误");
+        if (!checkRegisterVerifyCode(attributes.getRequest().getSession(), requestCaptcha)) {
+            throw new FailedLoginException("验证码错误");
         }
 
         String[] platforms = StringUtil.split(platform, ",");
@@ -160,6 +156,18 @@ public class MyCaptchaAuthenticationHandler extends AbstractUsernamePasswordAuth
         return createHandlerResult(transformedCredential, new DefaultPrincipalFactory().createPrincipal(MapUtils.getString(returnMap, "casAccountId"), returnMap));
     }
 
+    public boolean checkRegisterVerifyCode(HttpSession httpSession, String verifycode) {
+        String cap = (String) httpSession.getAttribute("login_captcha");
+        boolean checkResult = false;
+        if (cap != null) {
+            checkResult = StringUtil.equalsIgnoreCase(cap.toLowerCase(), verifycode.toLowerCase());
+        }
+        /**
+         * 成功使用之后过期旧验证码
+         */
+        httpSession.removeAttribute("login_captcha");
+        return checkResult;
+    }
 
     @Override
     public boolean supports(Credential credential) {

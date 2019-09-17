@@ -29,12 +29,13 @@ public class WechatLoginController extends AbstractController {
     /**
      * 因微信局限了oauth请求授权的页面，故需要借助cas来做跳板获取openid从而获取当前用户
      *
-     * @param callback
-     * @param code
+     * @param request
+     * @param response
      * @return
      * @throws Exception
      * @author songlin
      */
+    @Override
     @RequestMapping("wechatOauth")
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
 

@@ -1,4 +1,7 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   cn.wuxia.cas.configuration.SpringConfiguration,\
   cn.wuxia.cas.configuration.MyAuthenticationConfiguration,\
-  cn.wuxia.cas.configuration.MyCaptchaWebflowConfiguration
+  cn.wuxia.cas.configuration.MyCaptchaWebflowConfiguration,\
+  cn.wuxia.cas.configuration.CasWeChatAuthenticationConfiguration,\
+  cn.wuxia.cas.action.WeChatAuthenticationAction,\
+  cn.wuxia.cas.configuration.WeChatAuthenticationEventExecutionPlanConfiguration

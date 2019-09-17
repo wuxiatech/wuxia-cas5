@@ -26,10 +26,10 @@
     <link rel="stylesheet" href="//cdn.doctorm.cn/unify19/assets/css/footers/footer-v2.css">
     <link rel="stylesheet" href="//cdn.doctorm.cn/unify19/assets/css/theme-colors/orange.css">
     <link rel="stylesheet" href="//cdn.doctorm.cn/unify19/assets/css/app.css">
-    <link rel="stylesheet" href="//zjcdn.cn/fdd/css/base.css">
-    <link rel="stylesheet" href="//zjcdn.cn/fdd/css/fdd-pc-head-foot.css">
-    <link rel="stylesheet" href="//zjcdn.cn/fdd/css/fdd-pc-background.css">
-    <link rel="stylesheet" href="//zjcdn.cn/fdd/css/fdd-pc.css">
+    <link rel="stylesheet" href="//fdd.zjcdn.cn/css/base.css">
+    <link rel="stylesheet" href="//fdd.zjcdn.cn/css/fdd-pc-head-foot.css">
+    <link rel="stylesheet" href="//fdd.zjcdn.cn/css/fdd-pc-background.css">
+    <link rel="stylesheet" href="//fdd.zjcdn.cn/css/fdd-pc.css">
     <link rel="stylesheet" th:href="@{${#themes.code('cas.daoming.css')}}">
     <style>
         .impowerBox .loginPanel .title, .impowerBox .info {
@@ -49,6 +49,15 @@
         .form-group .invalid {
             display: block;
         }
+        .items_panel {
+            padding: 30px 50px 30px 50px;
+        }
+        .loginWrap{
+            min-height: 600px;
+        }
+        .right-panel{
+            width: 330px;
+        }
     </style>
     <script type="text/javascript" src="//cdn.doctorm.cn/unify19/assets/plugins/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="//cdn.doctorm.cn/unify19/assets/plugins/jquery/jquery-migrate.min.js"></script>
@@ -66,9 +75,9 @@
     <script th:src="@{${#themes.code('cas.daoming.js')}}"></script>
 </head>
 <body>
-<input type="hidden" value="<%= url %>" id="scanUrl" name="scanUrl">
-<input type="hidden" value="<%= isBindWechat %>" id="isBindWechat" name="isBindWechat">
-<input type="hidden" value="<%= appId %>" id="appId" name="appId">
+<input type="hidden" value="http://passport.doctorm.cn" id="scanUrl" name="scanUrl">
+<input type="hidden" value="" id="isBindWechat" name="isBindWechat">
+<input type="hidden" value="wx98022f921a4c511a" id="appId" name="appId">
 <!-- 头部开始 -->
 <!--=== Header v1 ===-->
 <div class="header-v1 fdd-header-v1">
@@ -159,6 +168,28 @@
                                        th:accesskey="#{screen.welcome.label.password.accesskey}"
                                        th:field="*{password}"
                                        autocomplete="off"/>
+
+                                <span id="capslock-on" style="display:none;">
+                                <p>
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span th:utext="#{screen.capslock.on}"/>
+                                </p>
+                            </span>
+                            </div>
+                        </section>
+                        <section class="form-group login-input">
+                            <!--<label for="password" th:utext="#{screen.welcome.label.password}">Password</label>-->
+
+                            <div class="input-group  input-captcha">
+                                <span class="input-group-addon"><i class="fa  fa-check-square-o"></i></span>
+                                <input class="required" style="width: 60%" id="checkVerifyCode"
+                                       type="text"
+                                       size="6"
+                                       tabindex="3"
+                                       th:accesskey="#{screen.welcome.label.captcha.accesskey}"
+                                       th:field="*{captcha}"
+                                       autocomplete="off"/>
+                                <img src="loginVerifyCode" width="100" height="44" alt="Captcha image" id="login_img_verifycode" onclick="changeVerifyCode">
                                 <span id="capslock-on" style="display:none;">
                                 <p>
                                     <i class="fa fa-exclamation-circle"></i>
@@ -170,6 +201,7 @@
                         <div class="login-btn-bar">
                             <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
                             <input type="hidden" name="_eventId" value="submit"/>
+                            <input type="hidden" name="platform" value="${platform}"/>
                             <input type="hidden" name="geolocation"/>
                             <input class="btn btn-u btn-block rounded h_40 but-u-1 btn-u-green"
                                    th:unless="${recaptchaSiteKey != null AND recaptchaInvisible != null AND recaptchaSiteKey AND recaptchaInvisible}"
@@ -192,7 +224,7 @@
                         </div>
                         <div class="row pt_15">
                             <div class="col-xs-6 tex_l bluelink">
-                                <a href="<%=url %>/auth/join">免费入驻</a>
+                                <a href="/clientredirect?client_name=WeChat">微信登录</a>
                             </div>
                             <div class="col-xs-6 tex_r bluelink">
                                 <a href="<%=url %>/auth/changepassword">忘记密码</a>
@@ -236,7 +268,7 @@
         var isBindWechat = $("#isBindWechat").val();
         var appId = $("#appId").val();
         if (null == appId || "" == appId.trim()) {
-            appId = "wxe0eecb679a24045f";
+            appId = "wx98022f921a4c511a";
         }
         if (null != isBindWechat && "false" == isBindWechat) {
             $("#tips").show();
@@ -257,12 +289,31 @@
             id: "login_container",
             appid: appId,
             scope: "snsapi_login",
-            redirect_uri: encodeURI(scanUrl + "/auth/bind"),
+            redirect_uri: encodeURI(scanUrl + "/pc/login"),
             state: "1",
             style: "white",
             href: ""
         });
+        $("#checkVerifyCode").blur(function(){ //验证用户名是否存在
+            $.post(
+                "/checkVerifyCode",
+                {
+                    verifycode:$("#checkVerifyCode").val()
+                },
+                function(rtx){
+                    if(rtx){
+
+                    }else{
+
+                    }
+                }
+            )
+        })
     });
+    function changeVerifyCode(){
+        var append = '?' + new Date().getTime();
+        $("#login_img_verifycode").attr('src', '/auth/loginVerifyCode' + append);
+    }
 </script>
 
 <!--[if lt IE 9]>

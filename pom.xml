@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd ">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.wuxia.cas</groupId>
-    <artifactId>wuxia-cas-server5</artifactId>
+    <groupId>cn.wuxia.project</groupId>
+    <artifactId>wuxia.project-cas-server5</artifactId>
     <packaging>war</packaging>
     <version>2.0</version>
     <name>WUXIA CAS Server 5.3</name>
@@ -25,7 +25,7 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.6</version>
                 <configuration>
-                    <warName>cas</warName>
+                    <warName>wuxia-cas5</warName>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <recompressZippedFiles>false</recompressZippedFiles>
                     <archive>
@@ -50,7 +50,7 @@
                 <version>3.3</version>
             </plugin>
         </plugins>
-        <finalName>wuxia-cas2</finalName>
+        <finalName>wuxia-cas5</finalName>
     </build>
 
     <dependencies>
@@ -83,6 +83,11 @@
         </dependency>
         <dependency>
             <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-pac4j-webflow</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-oauth-webflow</artifactId>
             <version>${cas.version}</version>
         </dependency>
@@ -105,7 +110,7 @@
         <dependency>
             <groupId>cn.wuxia.common</groupId>
             <artifactId>wuxia.common</artifactId>
-            <version>2.3.3</version>
+            <version>2.3.8</version>
             <exclusions>
                 <exclusion>
                     <groupId>ch.qos.logback</groupId>
@@ -124,7 +129,13 @@
         <dependency>
             <groupId>cn.wuxia.common</groupId>
             <artifactId>wuxia.weixin-api</artifactId>
-            <version>2.3.3.1</version>
+            <version>2.3.8</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/nl.captcha/simplecaptcha -->
+        <dependency>
+            <groupId>nl.captcha</groupId>
+            <artifactId>simplecaptcha</artifactId>
+            <version>1.2.1</version>
         </dependency>
         <dependency>
             <groupId>org.apereo.cas</groupId>
@@ -159,6 +170,16 @@
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-webflow</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest-authentication</artifactId>
             <version>${cas.version}</version>
         </dependency>
         <dependency>
@@ -233,6 +254,10 @@
         <repository>
             <id>spring-milestones</id>
             <url>https://repo.spring.io/milestone</url>
+        </repository>
+        <repository>
+            <id>enonic</id>
+            <url>http://repo.enonic.com/public/</url>
         </repository>
     </repositories>
     <pluginRepositories>
