@@ -3,7 +3,7 @@
   "serviceId" : "^(http|https|imaps)://(.*)\\.doctorm\\.cn.*",
   "name" : "daoming",
   "theme" : "daoming",
-  "id" : 10000003,
+  "id" : 10000005,
   "description" : "daoming passport service",
   "evaluationOrder" : 1,
   "attributeReleasePolicy" : {

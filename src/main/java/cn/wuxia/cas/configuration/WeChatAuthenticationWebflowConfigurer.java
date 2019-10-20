@@ -31,7 +31,7 @@ public class WeChatAuthenticationWebflowConfigurer extends DefaultLoginWebflowCo
             actionState.getTransitionSet().add(createTransition(CasWebflowConstants.TRANSITION_ID_SUCCESS,
 //                    CasWebflowConstants.STATE_ID_SEND_TICKET_GRANTING_TICKET));
                     CasWebflowConstants.STATE_ID_CREATE_TICKET_GRANTING_TICKET));
-            actionState.getTransitionSet().add(createTransition(CasWebflowConstants.TRANSITION_ID_NO, CasWebflowConstants.STATE_ID_VIEW_LOGIN_FORM));
+            actionState.getTransitionSet().add(createTransition(CasWebflowConstants.TRANSITION_ID_ERROR, CasWebflowConstants.STATE_ID_VIEW_LOGIN_FORM));
             actionState.getTransitionSet().add(createTransition(CasWebflowConstants.TRANSITION_ID_AUTHENTICATION_FAILURE, CasWebflowConstants.STATE_ID_VIEW_LOGIN_FORM));
             actionState.getExitActionList().add(createEvaluateAction("clearWebflowCredentialsAction"));
             registerMultifactorProvidersStateTransitionsIntoWebflow(actionState);

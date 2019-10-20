@@ -49,13 +49,16 @@
         .form-group .invalid {
             display: block;
         }
+
         .items_panel {
             padding: 30px 50px 30px 50px;
         }
-        .loginWrap{
+
+        .loginWrap {
             min-height: 600px;
         }
-        .right-panel{
+
+        .right-panel {
             width: 330px;
         }
     </style>
@@ -75,8 +78,9 @@
     <script th:src="@{${#themes.code('cas.daoming.js')}}"></script>
 </head>
 <body>
-<input type="hidden" value="http://passport.doctorm.cn" id="scanUrl" name="scanUrl">
-<input type="hidden" value="" id="isBindWechat" name="isBindWechat">
+<input type="hidden" th:value="${service.id}" id="serviceid"/>
+<input type="hidden" th:value="'http://passport.doctorm.cn/login?appid=wx98022f921a4c511a&service='" id="scanUrl"
+       name="scanUrl">
 <input type="hidden" value="wx98022f921a4c511a" id="appId" name="appId">
 <!-- 头部开始 -->
 <!--=== Header v1 ===-->
@@ -186,10 +190,10 @@
                                        type="text"
                                        size="6"
                                        tabindex="3"
-                                       th:accesskey="#{screen.welcome.label.captcha.accesskey}"
                                        th:field="*{captcha}"
                                        autocomplete="off"/>
-                                <img src="loginVerifyCode" width="100" height="44" alt="Captcha image" id="login_img_verifycode" onclick="changeVerifyCode">
+                                <img src="loginVerifyCode" width="100" height="44" alt="Captcha image"
+                                     id="login_img_verifycode" onclick="changeVerifyCode">
                                 <span id="capslock-on" style="display:none;">
                                 <p>
                                     <i class="fa fa-exclamation-circle"></i>
@@ -285,32 +289,58 @@
             $(this).prev().find(".ul-list").toggleClass("h_20");
         });
         var scanUrl = $("#scanUrl").val();
+        var serviceid = $("#serviceid").val();
+        scanUrl = scanUrl.replace(/:/g, "%3A").replace(/\//g, "%2F");
+        serviceid = serviceid.replace(/:/g, "%3A").replace(/\//g, "%2F");
+        console.log(scanUrl);
+        console.log(serviceid);
         var obj = new WxLogin({
             id: "login_container",
             appid: appId,
             scope: "snsapi_login",
-            redirect_uri: encodeURI(scanUrl + "/pc/login"),
+            redirect_uri: scanUrl + serviceid,
             state: "1",
             style: "white",
             href: ""
         });
-        $("#checkVerifyCode").blur(function(){ //验证用户名是否存在
+        $("#checkVerifyCode").blur(function () { //验证用户名是否存在
             $.post(
                 "/checkVerifyCode",
                 {
-                    verifycode:$("#checkVerifyCode").val()
+                    verifycode: $("#checkVerifyCode").val()
                 },
-                function(rtx){
-                    if(rtx){
+                function (rtx) {
+                    if (rtx) {
 
-                    }else{
+                    } else {
 
                     }
                 }
             )
+        }).click(function () {
+            changeVerifyCode();
         })
     });
-    function changeVerifyCode(){
+
+    function AsciiToUnicode(content) {
+        result = '';
+        for (var i = 0; i < content.length; i++)
+            result += '&#' + content.charCodeAt(i) + ';';
+        alert("ASCII：" + content + "\nUnicode：" + result);
+    }
+
+    //Unicode 转换 ASCII
+    function UnicodeToAscii(content) {
+        var code = content.match(/&#(\d+);/g);
+        result = '';
+        for (var i = 0; i < code.length; i++) {
+            result += String.fromCharCode(code[i].replace(/[&#;]/g, ''));
+        }
+        alert("Unicode：" + content + "\nASCII：" + result);
+        return result;
+    }
+
+    function changeVerifyCode() {
         var append = '?' + new Date().getTime();
         $("#login_img_verifycode").attr('src', '/auth/loginVerifyCode' + append);
     }

@@ -76,21 +76,21 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-pac4j</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-pac4j-webflow</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-oauth-webflow</artifactId>
-            <version>${cas.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apereo.cas</groupId>-->
+<!--            <artifactId>cas-server-support-pac4j</artifactId>-->
+<!--            <version>${cas.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apereo.cas</groupId>-->
+<!--            <artifactId>cas-server-support-pac4j-webflow</artifactId>-->
+<!--            <version>${cas.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.apereo.cas</groupId>-->
+<!--            <artifactId>cas-server-support-oauth-webflow</artifactId>-->
+<!--            <version>${cas.version}</version>-->
+<!--        </dependency>-->
         <!--服务注册-->
         <dependency>
             <groupId>org.apereo.cas</groupId>

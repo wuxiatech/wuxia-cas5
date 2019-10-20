@@ -1,11 +1,11 @@
 {
   "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^(https|http)://.*",
+  "serviceId" : "^(http|https|imaps)://.*",
   "name" : "Localhost",
   "theme" : "daoming",
   "id" : 10000003,
-  "description" : "Apereo foundation sample service",
-  "evaluationOrder" : 1,
+  "description" : "localhost service",
+  "evaluationOrder" : 10,
   "attributeReleasePolicy" : {
     "@class" : "org.apereo.cas.services.ReturnAllAttributeReleasePolicy"
   }

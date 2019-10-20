@@ -28,7 +28,7 @@ public class WeChatCredential extends AbstractCredential {
 
     @Override
     public String getId() {
-        return wxUserInfo.getUnionid();
+        return wxUserInfo.getOpenid();
     }
 
 }

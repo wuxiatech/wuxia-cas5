@@ -211,6 +211,10 @@
             <AppenderRef ref="casConsole"/>
             <AppenderRef ref="casFile"/>
         </AsyncLogger>
+        <AsyncLogger name="cn.wuxia" level="debug" additivity="false">
+            <AppenderRef ref="casConsole"/>
+            <AppenderRef ref="casFile"/>
+        </AsyncLogger>
         <AsyncLogger name="perfStatsLogger" level="info" additivity="false" includeLocation="true">
             <AppenderRef ref="casPerf"/>
         </AsyncLogger>
@@ -221,6 +225,8 @@
             <AppenderRef ref="casAudit"/>
             <AppenderRef ref="casFile"/>
         </AsyncLogger>
+
+
         <AsyncRoot level="error">
             <AppenderRef ref="casConsole"/>
         </AsyncRoot>

@@ -16,7 +16,6 @@ import com.google.common.collect.Lists;
 import nl.captcha.Captcha;
 import nl.captcha.backgrounds.GradiatedBackgroundProducer;
 import nl.captcha.gimpy.BlockGimpyRenderer;
-import nl.captcha.gimpy.DropShadowGimpyRenderer;
 import nl.captcha.gimpy.FishEyeGimpyRenderer;
 import nl.captcha.noise.StraightLineNoiseProducer;
 import nl.captcha.servlet.CaptchaServletUtil;
@@ -160,9 +159,9 @@ public class RegisterAfterLoginController extends AbstractController {
         return authenticationResult.getAuthentication();
     }
 
-    @Value("${cas.authn.pac4j.oauth2[0].id}")
+    @Value("${cas.authn.pac4j.oauth2[0].id:}")
     private String appid;
-    @Value("${cas.authn.pac4j.oauth2[0].secret}")
+    @Value("${cas.authn.pac4j.oauth2[0].secret:}")
     private String secret;
 
     //进入绑定手机页面
@@ -210,7 +209,7 @@ public class RegisterAfterLoginController extends AbstractController {
         //加网--第一个参数是横线颜色，第二个参数是竖线颜色
         builder.gimp(new FishEyeGimpyRenderer(Color.gray, Color.green));
         //加入阴影效果 默认3，75
-        builder.gimp(new DropShadowGimpyRenderer());
+        //builder.gimp(new DropShadowGimpyRenderer());
 
         //自定义设置字体颜色和大小 最简单的效果 多种字体随机显示
         List<Font> fontList = new ArrayList<Font>();
